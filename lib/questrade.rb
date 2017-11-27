@@ -1,5 +1,5 @@
-class Hola
-    def self.hi
-      puts "Hello world!"
-    end
+require "questrade/version"
+
+module Questrade
+  # Your code goes here...
 end
