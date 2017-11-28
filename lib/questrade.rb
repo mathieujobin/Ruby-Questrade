@@ -1,5 +1,6 @@
 require "questrade/version"
+require "questrade/client"
 
 module Questrade
-  # Your code goes here...
+  USER_AGENT = "questrade/#{Questrade::VERSION}".freeze
 end
