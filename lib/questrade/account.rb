@@ -11,6 +11,26 @@ module Questrade
       get('/accounts')['accounts']
     end
 
-    def positions
+    def positions(id)
+      get("/accounts/#{id}/positions")['position']
+    end
+
+    def executons(id)
+      get("/accounts/#{id}/executions")['executions']
+    end
+
+    def balances(id)
+      get("/accounts/#{id}/balances")
+    end
+
+    def activities(id)
+      get("/accounts/#{id}/activities")['activities']
+    end
+
+    # FIXME: change to handle orderID
+    def order(id, orderid = '')
+      get("/accounts/#{id}/orders")['orders']
+    end
+
   end
 end
