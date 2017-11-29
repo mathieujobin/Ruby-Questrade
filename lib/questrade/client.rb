@@ -39,8 +39,24 @@ module Questrade
 
     include Questrade::Account
 
-    def connection
-      return nil
+    def connect
+      @connect ||= Faraday.new @endpoint do |f|
+        f.request :json
+        f.headers[:user_agent] = Questrade::USER_AGENT
+        f.headers['Authorization'] = "Bearer #{@token}"
+        f.response :mashify
+        f.response :json, content_type: /\bjson$/
+        f.adapter Faraday.default_adapter
+      end
+    end
+
+    def req(method, path, data = {})
+      result = connect.send(method, "v1/#{path}", data)
+      if result.success? && !result.body.blank
+        result.body
+      else
+        result
+      end
     end
 
     def get(path)
@@ -55,9 +71,7 @@ module Questrade
       return path
     end
 
-    def connect
-      return nil
-    end
+
 
   end
 
