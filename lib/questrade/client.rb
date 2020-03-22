@@ -3,6 +3,13 @@ require 'faraday_middleware'
 
 module Questrade
 
+  # inspired by https://github.com/leanderlee/questrade/blob/8c498ac/index.js#L78
+  def self.refresh_token
+    # I am not sure what I need to do here. but I am thinking I should be storing token in a keys folder
+    # and return the latest one, for no, maybe an empty string will do, as some sort of init value
+    ""
+  end
+  
   def self.login(token)
     url = "https://login.questrade.com/oauth2/"
 
@@ -15,14 +22,14 @@ module Questrade
     endpoint = "#{url}token?grant_type=refresh_token&refresh_token=#{refresh_token}"
     res = connect.send(:post, endpoint)
 
-    if r.success?
+    if res.success?
       puts "Refresh token: #{res.body['refresh_token']}"
       endpoint = res.body['api_server']
       token = res.body['access_token']
       return Client.new(endpoint: endpoint, token: token)
     else
       puts "Login failed! Error Message: "
-      puts r.body
+      puts res.body
       return nil
     end
   end
