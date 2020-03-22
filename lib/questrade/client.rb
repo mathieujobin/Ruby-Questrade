@@ -1,4 +1,4 @@
-require 'questrade/acccount'
+require 'questrade/account'
 require 'faraday'
 
 module Questrade
