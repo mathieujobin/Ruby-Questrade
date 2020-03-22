@@ -1,5 +1,5 @@
 require 'questrade/account'
-require 'faraday'
+require 'faraday_middleware'
 
 module Questrade
 
