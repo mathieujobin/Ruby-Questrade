@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "questrade/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "questrade_api"
+  spec.name          = "questrade"
   spec.version       = Questrade::VERSION
   spec.authors       = ["Vaibhav Khaitan"]
   spec.email         = ["ishuvaibhav@gmail.com"]
